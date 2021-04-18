@@ -5,12 +5,14 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.nio.IntBuffer;
 
 @Mixin(RenderList.class)
-public class RenderListMixin implements RenderListI {
+public class RenderListMixin {
     @Shadow private IntBuffer field_2486;
     @Shadow private boolean field_2487;
     @Shadow private int field_2480;
@@ -21,8 +23,8 @@ public class RenderListMixin implements RenderListI {
     double field_2484N;
     double field_2485N;
 
-    @Override
-    public void method_1912(int i, int j, int k, double d, double d1, double d2) {
+    @Inject(at = @At("HEAD"), method = "method_1912", cancellable = true)
+    public void method_1912(int i, int j, int k, double d, double d1, double d2, CallbackInfo ci) {
         this.field_2487 = true;
         this.field_2486.clear();
         this.field_2480 = i;
@@ -31,6 +33,7 @@ public class RenderListMixin implements RenderListI {
         this.field_2483N = d;
         this.field_2484N = d1;
         this.field_2485N = d2;
+        ci.cancel();
     }
 
     @Redirect(at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glTranslatef(FFF)V"), method = "method_1909")

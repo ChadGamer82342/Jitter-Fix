@@ -4,11 +4,11 @@
   "package": "net.jitterfix.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "RenderListMixin"
   ],
   "server": [
   ],
   "client": [
+    "RenderListMixin"
   ],
   "injectors": {
     "defaultRequire": 1
