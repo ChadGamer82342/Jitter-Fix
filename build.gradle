@@ -70,7 +70,7 @@ dependencies {
 	// to change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 
-	mappings loom.fromCommit("calmilamsy/BIN-Mappings", "${project.yarn_mappings}") {spec ->
+	mappings loom.fromCommit("ChadGamer82342/MCP-Mappings", "${project.yarn_mappings}") {spec ->
 		spec.version = "b1.7.3-${project.yarn_mappings}"
 	}
 
